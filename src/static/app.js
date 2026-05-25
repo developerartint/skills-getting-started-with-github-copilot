@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function showMessage(text, type) {
     messageDiv.textContent = text;
-    messageDiv.className = type;
+    messageDiv.className = `message ${type}`;
     messageDiv.classList.remove("hidden");
 
     setTimeout(() => {
@@ -100,8 +100,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (response.ok) {
         showMessage(result.message, "success");
+        await fetchActivities();
         signupForm.reset();
-        fetchActivities();
       } else {
         showMessage(result.detail || "An error occurred", "error");
       }
@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const result = await response.json();
       if (response.ok) {
         showMessage(result.message, "success");
-        fetchActivities();
+        await fetchActivities();
       } else {
         showMessage(result.detail || "Could not remove participant", "error");
       }
